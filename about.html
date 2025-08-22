@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOFTGRAM - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+            padding-top: 80px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(20, 68, 160, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .logo a {
+            display: block;
+            height: 100%;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1444A0, #40e0d0);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #1444A0;
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+            min-height: calc(100vh - 80px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #1444A0;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #1444A0, #40e0d0);
+            border-radius: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-overview {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(20, 68, 160, 0.1);
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1444A0;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .company-info {
+            background: rgba(20, 68, 160, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(20, 68, 160, 0.1);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(20, 68, 160, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item .label {
+            font-weight: 600;
+            color: #1444A0;
+        }
+
+        .info-item .value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .about-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(20, 68, 160, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1444A0, #40e0d0);
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-card.purpose::before {
+            background: linear-gradient(90deg, #1444A0, #2563eb);
+        }
+
+        .about-card.vision::before {
+            background: linear-gradient(90deg, #40e0d0, #06b6d4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1444A0;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Purpose Items Styling */
+        .purpose-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .purpose-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .purpose-number {
+            background: linear-gradient(135deg, #1444A0, #2563eb);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(20, 68, 160, 0.3);
+        }
+
+        .purpose-content {
+            flex: 1;
+        }
+
+        .purpose-content h6 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1444A0;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .purpose-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .purpose-conclusion {
+            font-weight: 600;
+            color: #1444A0;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1444A0;
+            color: white;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .about-overview,
+            .about-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="sg_redesign.html#home">
+                    <img src="소프트그램 로고.png" alt="SOFTGRAM">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="about.html" class="active">ABOUT US</a></li>
+                <li><a href="sg_redesign.html#services">SERVICE</a></li>
+                <li><a href="#solution">SOLUTION</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="sg_redesign.html#contact">CONTACT</a></li>
+                <li><a href="#" class="language">KR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">회사 소개</h2>
+            <div class="about-grid">
+                <div class="about-overview">
+                    <div class="about-content">
+                        <h3>Overview</h3>
+                        <p>소프트그램은 종합금융솔루션 회사로서 혁신적인 핀테크 솔루션을 통해 기업의 디지털 전환을 선도하는 전문 기업입니다. 고객의 특성과 환경에 맞는 최적화된 서비스를 제공하며 진정한 비즈니스 파트너로서 고객과 함께 성장합니다.</p>
+                        <div class="company-info">
+                            <div class="info-item">
+                                <span class="label">회사명</span>
+                                <span class="value">소프트그램 / SOFTGRAM Co.Ltd</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">대표자</span>
+                                <span class="value">김현수</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">설립일</span>
+                                <span class="value">1995년 12월 15일</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">직원수</span>
+                                <span class="value">15명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-cards">
+                    <div class="about-card purpose">
+                        <div class="card-icon">🎯</div>
+                        <h4>Purpose</h4>
+                        <h5>사명과 목적</h5>
+                        <div class="purpose-items">
+                            <div class="purpose-item">
+                                <div class="purpose-number">1</div>
+                                <div class="purpose-content">
+                                    <h6>시장/고객중심의 가치 창조</h6>
+                                    <p>소프트그램이 정한 시장에서 고객을 창출하고, 고객들이 필요로 하는 품질과 가치, 즉, 사용자 (시람들과 사회) 들이 운영하고 관리한 실물 실어 가능한 필요한 차별화된 제품 개발과 서비스를 통하여, 시장에 새로운 가치를 창조 및 제공하고, 고객과 고객의 사업을 보호하고 성공을 지원하는 것.</p>
+                                </div>
+                            </div>
+                            <div class="purpose-item">
+                                <div class="purpose-number">2</div>
+                                <div class="purpose-content">
+                                    <h6>정직한 이윤 극대화의 목적과 분배의 원칙</h6>
+                                    <p>정직하고 정당한 이윤을 극대화하여 고객, 주주, 직원과 사회에 그 이윤을 나누는 것과,</p>
+                                </div>
+                            </div>
+                            <div class="purpose-item">
+                                <div class="purpose-number">3</div>
+                                <div class="purpose-content">
+                                    <h6>윤리, 투명, 성공한 기업시민으로서의 대안 제시 책임</h6>
+                                    <p>상기 목적을 효과적으로 달성하는 새로운 기업의 모델과 문화를 창조하고, 기존 잘못된 기업의 관행들을 발전적으로 극복하고, 또한 영향력이고 존경받는 기업으로 성공함으로써, 정직하고 혁신적인 새로운 기업 모델의 대안을 제시하는 것을</p>
+                                    <p class="purpose-conclusion">목적으로 소프트그램은 설립되었습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card vision">
+                        <div class="card-icon">🚀</div>
+                        <h4>Vision</h4>
+                        <h5>비전과 미래</h5>
+                        <p>가장 가치있고, 안전하고, 편리한 소프트웨어를 개발하고 이와 관련된 분야의 제한 서비스를 제공하며, 인프라를 창조하여서비스 사용자의 이익과 편익을 증진시키는, 세계적인 수준의 탁월한 솔루션 즉, 제품 및 서비스를 제공하는 것에 최고의 정성을 다하는, 기업 출로한 소프트웨어 및 서비스 제조 회사가 되는 것입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SOFTGRAM. All rights reserved. | 혁신적인 소프트웨어 솔루션의 파트너</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
