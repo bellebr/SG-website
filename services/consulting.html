@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컨설팅 - SOFTGRAM</title>
+    <meta name="description" content="SOFTGRAM의 IT 컨설팅 서비스. 비즈니스 목표 달성을 위한 전략적 IT 컨설팅과 디지털 트랜스포메이션을 지원합니다.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding-top: 64px;
+            overflow-x: hidden;
+        }
+
+        /* Header - consistent with main page */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            height: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #777777;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #1444A0;
+            text-shadow: 0.5px 0 0 currentColor;
+        }
+
+        .nav-links .language {
+            margin-left: 3rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb-nav a {
+            color: #1444A0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #0d2f6b;
+        }
+
+        .breadcrumb-separator {
+            color: #ccc;
+        }
+
+        /* Container and Section Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .service-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(20, 68, 160, 0.1);
+            color: #1444A0;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #666666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            margin-top: 3rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666666;
+            line-height: 1.7;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1444A0;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Services Areas Section */
+        .service-areas {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .service-areas-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-area-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-area-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-area-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-area-card .icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(20, 68, 160, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-area-card .icon i {
+            color: #1444A0;
+            font-size: 16px;
+        }
+
+        .service-area-card p {
+            color: #666666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-area-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-area-card ul li {
+            color: #666666;
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-area-card ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1444A0;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1444A0 0%, #2760c8 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #1444A0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1444A0;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-areas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: none;
+        }
+
+        .fade-in-up.animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../img sources/logo_sg.png" alt="SOFTGRAM">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../about.html">회사 소개</a></li>
+                <li><a href="../index.html#services" class="active">서비스</a></li>
+                <li><a href="../index.html#solution">솔루션</a></li>
+                <li><a href="../projects.html">프로젝트</a></li>
+                <li><a href="#" class="language">KR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">홈</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../index.html#services">서비스</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>컨설팅</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <div class="hero-badge">Consulting</div>
+                <h1 class="hero-title">컨설팅</h1>
+                <p class="hero-subtitle">
+                    비즈니스 목표 달성을 위한 전략적 IT 컨설팅 서비스를 제공합니다.<br>
+                    업계 전문가들이 고객의 요구사항을 분석하여 최적의 솔루션을 제안합니다.
+                </p>
+            </div>
+            <div class="hero-image fade-in-up">
+                <img src="../img sources/services_consulting.jpg" alt="IT 컨설팅 서비스">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Our Expertise</p>
+                <h2 class="section-title">컨설팅의 핵심 가치</h2>
+                <p class="section-description">
+                    데이터 기반의 분석과 전략적 접근으로 비즈니스 혁신을 이끌어냅니다
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3>전략적 기획</h3>
+                    <p>비즈니스 목표와 IT 전략의 완벽한 정렬을 통해 경쟁우위를 확보하고 지속가능한 성장을 지원합니다.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3>디지털 트랜스포메이션</h3>
+                    <p>최신 기술 동향과 시장 변화를 반영한 디지털 혁신 로드맵을 제시하여 미래 경쟁력을 강화합니다.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>조직 역량 강화</h3>
+                    <p>기술 도입뿐만 아니라 조직의 역량 발전과 변화 관리를 통해 실질적인 성과를 창출합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Areas Section -->
+    <section class="service-areas">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Service Areas</p>
+                <h2 class="section-title">전문 컨설팅 영역</h2>
+                <p class="section-description">
+                    다양한 산업 분야의 전문 지식과 풍부한 경험을 바탕으로 최적의 솔루션을 제공합니다
+                </p>
+            </div>
+            <div class="service-areas-grid">
+                <div class="service-area-card fade-in-up">
+                    <h3>
+                        <div class="icon">
+                            <i data-lucide="building-2"></i>
+                        </div>
+                        핀테크 전략 컨설팅
+                    </h3>
+                    <p>금융 서비스 혁신과 핀테크 생태계 구축을 위한 전략적 컨설팅을 제공합니다.</p>
+                    <ul>
+                        <li>디지털 뱅킹 전략 수립</li>
+                        <li>핀테크 서비스 설계</li>
+                        <li>금융 규제 대응 방안</li>
+                        <li>고객 경험(CX) 최적화</li>
+                    </ul>
+                </div>
+                <div class="service-area-card fade-in-up">
+                    <h3>
+                        <div class="icon">
+                            <i data-lucide="cog"></i>
+                        </div>
+                        IT 아키텍처 컨설팅
+                    </h3>
+                    <p>기업의 IT 인프라와 시스템 아키텍처 최적화를 위한 전문 컨설팅을 진행합니다.</p>
+                    <ul>
+                        <li>엔터프라이즈 아키텍처 설계</li>
+                        <li>클라우드 전환 전략</li>
+                        <li>마이크로서비스 아키텍처</li>
+                        <li>보안 아키텍처 구축</li>
+                    </ul>
+                </div>
+                <div class="service-area-card fade-in-up">
+                    <h3>
+                        <div class="icon">
+                            <i data-lucide="bar-chart"></i>
+                        </div>
+                        데이터 분석 컨설팅
+                    </h3>
+                    <p>빅데이터와 AI를 활용한 데이터 기반 의사결정 체계 구축을 지원합니다.</p>
+                    <ul>
+                        <li>데이터 거버넌스 체계</li>
+                        <li>AI/ML 모델 개발 전략</li>
+                        <li>실시간 분석 시스템</li>
+                        <li>비즈니스 인텔리전스</li>
+                    </ul>
+                </div>
+                <div class="service-area-card fade-in-up">
+                    <h3>
+                        <div class="icon">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        보안 컨설팅
+                    </h3>
+                    <p>포괄적인 보안 전략과 리스크 관리 체계 구축을 통해 안전한 IT 환경을 제공합니다.</p>
+                    <ul>
+                        <li>보안 정책 및 절차 수립</li>
+                        <li>사이버 보안 전략</li>
+                        <li>컴플라이언스 대응</li>
+                        <li>보안 교육 및 훈련</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="fade-in-up">전략적 IT 컨설팅으로<br>비즈니스를 혁신하세요</h2>
+            <p class="fade-in-up">
+                SOFTGRAM의 전문 컨설턴트들이 귀하의 비즈니스 목표 달성을 위한<br>
+                맞춤형 전략과 실행 방안을 제시합니다
+            </p>
+            <a href="../index.html#contact" class="cta-button fade-in-up">컨설팅 문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 SOFTGRAM. All rights reserved.<br>혁신적인 소프트웨어 솔루션의 파트너</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+            
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

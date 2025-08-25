@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시스템 통합 - SOFTGRAM</title>
+    <meta name="description" content="SOFTGRAM의 시스템 통합 서비스. 기업의 핵심 비즈니스 프로세스를 위한 종합적인 시스템 통합 솔루션을 제공합니다.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding-top: 64px;
+            overflow-x: hidden;
+        }
+
+        /* Header - consistent with main page */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            height: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #777777;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #1444A0;
+            text-shadow: 0.5px 0 0 currentColor;
+        }
+
+        .nav-links .language {
+            margin-left: 3rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb-nav a {
+            color: #1444A0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #0d2f6b;
+        }
+
+        .breadcrumb-separator {
+            color: #ccc;
+        }
+
+        /* Container and Section Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .service-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(20, 68, 160, 0.1);
+            color: #1444A0;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #666666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            margin-top: 3rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666666;
+            line-height: 1.7;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1444A0;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            text-align: center;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #1444A0;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .process-step p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1444A0 0%, #2760c8 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #1444A0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1444A0;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: none;
+        }
+
+        .fade-in-up.animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../img sources/logo_sg.png" alt="SOFTGRAM">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../about.html">회사 소개</a></li>
+                <li><a href="../index.html#services" class="active">서비스</a></li>
+                <li><a href="../index.html#solution">솔루션</a></li>
+                <li><a href="../projects.html">프로젝트</a></li>
+                <li><a href="#" class="language">KR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">홈</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../index.html#services">서비스</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>시스템 통합</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <div class="hero-badge">System Integration</div>
+                <h1 class="hero-title">시스템 통합</h1>
+                <p class="hero-subtitle">
+                    기업의 핵심 비즈니스 프로세스를 위한 종합적인 시스템 통합 솔루션을 제공합니다.<br>
+                    최신 기술과 검증된 방법론을 통해 안정적이고 효율적인 IT 인프라를 구축합니다.
+                </p>
+            </div>
+            <div class="hero-image fade-in-up">
+                <img src="../img sources/services_si.jpg" alt="시스템 통합 서비스">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Our Approach</p>
+                <h2 class="section-title">통합 솔루션의 핵심 가치</h2>
+                <p class="section-description">
+                    복잡한 시스템 환경에서도 원활한 데이터 흐름과 프로세스 최적화를 실현합니다
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3>레거시 시스템 연동</h3>
+                    <p>기존 시스템을 보존하면서 새로운 기술과의 완벽한 통합을 통해 투자 보호와 기능 확장을 동시에 실현합니다.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3>실시간 데이터 처리</h3>
+                    <p>대용량 데이터의 실시간 처리와 분석을 통해 빠른 의사결정과 비즈니스 민첩성을 제공합니다.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3>보안 강화</h3>
+                    <p>엔터프라이즈급 보안 프레임워크를 적용하여 데이터 무결성과 시스템 안정성을 보장합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Process</p>
+                <h2 class="section-title">체계적인 통합 프로세스</h2>
+                <p class="section-description">
+                    검증된 방법론과 단계별 접근으로 안전하고 효율적인 시스템 통합을 진행합니다
+                </p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step fade-in-up">
+                    <div class="step-number">1</div>
+                    <h4>현황 분석</h4>
+                    <p>기존 시스템 아키텍처 분석과 비즈니스 요구사항 정의를 통한 통합 전략 수립</p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">2</div>
+                    <h4>설계 및 계획</h4>
+                    <p>통합 아키텍처 설계와 단계별 구현 계획 수립으로 리스크 최소화</p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">3</div>
+                    <h4>단계별 구현</h4>
+                    <p>점진적 통합을 통한 안정성 확보와 비즈니스 연속성 보장</p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">4</div>
+                    <h4>테스트 및 최적화</h4>
+                    <p>종합적인 성능 테스트와 지속적인 모니터링을 통한 시스템 최적화</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="fade-in-up">시스템 통합 프로젝트를<br>시작해보세요</h2>
+            <p class="fade-in-up">
+                SOFTGRAM의 전문가들이 귀하의 비즈니스에 최적화된<br>
+                시스템 통합 솔루션을 제안합니다
+            </p>
+            <a href="../index.html#contact" class="cta-button fade-in-up">프로젝트 문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 SOFTGRAM. All rights reserved.<br>혁신적인 소프트웨어 솔루션의 파트너</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+            
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

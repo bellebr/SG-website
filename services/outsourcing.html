@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아웃소싱 - SOFTGRAM</title>
+    <meta name="description" content="SOFTGRAM의 IT 아웃소싱 서비스. 전문적인 IT 운영 및 관리 서비스를 통해 고객의 비즈니스 집중도를 높입니다.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding-top: 64px;
+            overflow-x: hidden;
+        }
+
+        /* Header - consistent with main page */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            height: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #777777;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #1444A0;
+            text-shadow: 0.5px 0 0 currentColor;
+        }
+
+        .nav-links .language {
+            margin-left: 3rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb-nav a {
+            color: #1444A0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #0d2f6b;
+        }
+
+        .breadcrumb-separator {
+            color: #ccc;
+        }
+
+        /* Container and Section Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .service-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(20, 68, 160, 0.1);
+            color: #1444A0;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #666666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            margin-top: 3rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+            align-items: center;
+        }
+
+        .benefits-content h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(20, 68, 160, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefit-icon i {
+            color: #1444A0;
+            font-size: 20px;
+        }
+
+        .benefit-text h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .benefits-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .cost-comparison {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .comparison-item {
+            margin: 1.5rem 0;
+        }
+
+        .comparison-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .before {
+            color: #dc3545;
+        }
+
+        .after {
+            color: #28a745;
+        }
+
+        .savings {
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .savings h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Service Models Section */
+        .service-models {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .model-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .model-card.featured {
+            border: 2px solid #1444A0;
+            transform: scale(1.05);
+        }
+
+        .model-card.featured::before {
+            content: '인기';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1444A0;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .model-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .model-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .model-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .model-card p {
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .model-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .model-features li {
+            padding: 0.5rem 0;
+            color: #666666;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .model-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1444A0;
+            font-weight: bold;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1444A0;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1444A0 0%, #2760c8 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #1444A0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1444A0;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-card.featured {
+                transform: none;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: none;
+        }
+
+        .fade-in-up.animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../img sources/logo_sg.png" alt="SOFTGRAM">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../about.html">회사 소개</a></li>
+                <li><a href="../index.html#services" class="active">서비스</a></li>
+                <li><a href="../index.html#solution">솔루션</a></li>
+                <li><a href="../projects.html">프로젝트</a></li>
+                <li><a href="#" class="language">KR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">홈</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../index.html#services">서비스</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>아웃소싱</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="service-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <div class="hero-badge">Outsourcing</div>
+                <h1 class="hero-title">아웃소싱</h1>
+                <p class="hero-subtitle">
+                    전문적인 IT 운영 및 관리 서비스를 통해 고객의 비즈니스 집중도를 높입니다.<br>
+                    안정적이고 경제적인 IT 아웃소싱 솔루션을 제공합니다.
+                </p>
+            </div>
+            <div class="hero-image fade-in-up">
+                <img src="../img sources/services_outsourcing.jpg" alt="IT 아웃소싱 서비스">
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Why Choose Us</p>
+                <h2 class="section-title">아웃소싱의 핵심 이점</h2>
+                <p class="section-description">
+                    전문 인력과 최신 기술을 활용한 효율적인 IT 운영으로 비용 절감과 품질 향상을 동시에 실현합니다
+                </p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefits-content fade-in-up">
+                    <h3>왜 IT 아웃소싱인가?</h3>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="dollar-sign"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>비용 절감</h4>
+                            <p>인건비, 인프라 비용, 교육비 등 총 운영비용을 최대 40% 절감할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>전문 인력 확보</h4>
+                            <p>숙련된 IT 전문가들의 풍부한 경험과 최신 기술 역량을 즉시 활용할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="focus"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>핵심 업무 집중</h4>
+                            <p>IT 운영 업무를 아웃소싱하여 핵심 비즈니스에 더 많은 자원과 시간을 투자할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <div class="benefit-text">
+                            <h4>확장성</h4>
+                            <p>비즈니스 성장에 따라 IT 서비스 규모를 유연하게 조정할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="benefits-visual fade-in-up">
+                    <div class="cost-comparison">
+                        <h3 style="margin-bottom: 2rem; color: #1a1a1a;">비용 비교 분석</h3>
+                        <div class="comparison-item">
+                            <h4 class="before">기존 내부 운영</h4>
+                            <p>₩ 100M / 년</p>
+                        </div>
+                        <div style="font-size: 2rem; color: #1444A0; margin: 1rem 0;">⬇</div>
+                        <div class="comparison-item">
+                            <h4 class="after">아웃소싱 운영</h4>
+                            <p>₩ 60M / 년</p>
+                        </div>
+                        <div class="savings">
+                            <h4>연간 절감 효과</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold;">₩ 40M (40%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Models Section -->
+    <section class="service-models">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Service Models</p>
+                <h2 class="section-title">아웃소싱 서비스 모델</h2>
+                <p class="section-description">
+                    고객의 요구사항과 예산에 맞는 최적의 아웃소싱 모델을 선택하실 수 있습니다
+                </p>
+            </div>
+            <div class="models-grid">
+                <div class="model-card fade-in-up">
+                    <div class="model-icon">
+                        <i data-lucide="monitor"></i>
+                    </div>
+                    <h3>인프라 관리</h3>
+                    <p>서버, 네트워크, 보안 시스템 등 IT 인프라 전반의 운영과 관리를 전담합니다.</p>
+                    <ul class="model-features">
+                        <li>24/7 시스템 모니터링</li>
+                        <li>정기 백업 및 복구</li>
+                        <li>보안 패치 관리</li>
+                        <li>성능 최적화</li>
+                        <li>장애 대응 및 복구</li>
+                    </ul>
+                </div>
+                <div class="model-card featured fade-in-up">
+                    <div class="model-icon">
+                        <i data-lucide="code"></i>
+                    </div>
+                    <h3>개발 아웃소싱</h3>
+                    <p>웹, 모바일, 시스템 개발 프로젝트를 전문 개발팀이 완전히 대행합니다.</p>
+                    <ul class="model-features">
+                        <li>풀스택 개발팀 제공</li>
+                        <li>애자일 개발 방법론</li>
+                        <li>품질 보증 및 테스팅</li>
+                        <li>지속적인 유지보수</li>
+                        <li>프로젝트 관리</li>
+                    </ul>
+                </div>
+                <div class="model-card fade-in-up">
+                    <div class="model-icon">
+                        <i data-lucide="headphones"></i>
+                    </div>
+                    <h3>기술 지원</h3>
+                    <p>헬프데스크부터 고급 기술 지원까지 포괄적인 IT 지원 서비스를 제공합니다.</p>
+                    <ul class="model-features">
+                        <li>다국어 지원 센터</li>
+                        <li>원격 기술 지원</li>
+                        <li>사용자 교육 및 훈련</li>
+                        <li>IT 자산 관리</li>
+                        <li>변경 관리</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="fade-in-up">효율적인 IT 아웃소싱으로<br>비즈니스 경쟁력을 높이세요</h2>
+            <p class="fade-in-up">
+                SOFTGRAM의 전문 아웃소싱 서비스로 비용은 절감하고<br>
+                서비스 품질은 향상시키는 스마트한 선택을 하십시오
+            </p>
+            <a href="../index.html#contact" class="cta-button fade-in-up">아웃소싱 문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 SOFTGRAM. All rights reserved.<br>혁신적인 소프트웨어 솔루션의 파트너</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+            
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
