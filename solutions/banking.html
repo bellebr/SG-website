@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Solutions - SOFTGRAM</title>
+    <meta name="description" content="SOFTGRAM의 뱅킹 솔루션. 온라인 뱅킹 솔루션과 금융 서비스 플랫폼을 통해 안전하고 효율적인 금융 거래를 지원합니다.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding-top: 64px;
+            overflow-x: hidden;
+        }
+
+        /* Header - consistent with main page */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            height: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #777777;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #1444A0;
+            text-shadow: 0.5px 0 0 currentColor;
+        }
+
+        .nav-links .language {
+            margin-left: 3rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb-nav a {
+            color: #1444A0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: #0d2f6b;
+        }
+
+        .breadcrumb-separator {
+            color: #ccc;
+        }
+
+        /* Container and Section Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .solution-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #1444A0 0%, #2760c8 100%);
+            color: white;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-icon i {
+            color: white;
+            font-size: 32px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+            align-items: center;
+        }
+
+        .feature-content h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #1444A0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon i {
+            color: white;
+            font-size: 20px;
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .feature-visual {
+            position: relative;
+        }
+
+        .platform-mockup {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .mockup-header {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #28ca42; }
+
+        .mockup-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .balance-title {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Solutions Grid */
+        .solutions {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .solution-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #1444A0, #2760c8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .solution-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .solution-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .solution-card p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1444A0;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1444A0 0%, #2760c8 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #1444A0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: #1444A0;
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: none;
+        }
+
+        .fade-in-up.animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../img sources/logo_sg.png" alt="SOFTGRAM">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../about.html">회사 소개</a></li>
+                <li><a href="../index.html#services">서비스</a></li>
+                <li><a href="../index.html#solution" class="active">솔루션</a></li>
+                <li><a href="../projects.html">프로젝트</a></li>
+                <li><a href="#" class="language">KR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">홈</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="../index.html#solution">솔루션</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Banking</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="solution-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <div class="hero-icon">
+                    <i data-lucide="landmark"></i>
+                </div>
+                <h1 class="hero-title">Banking Solutions</h1>
+                <p class="hero-subtitle">
+                    온라인 뱅킹 솔루션과 금융 서비스 플랫폼을 통해<br>
+                    안전하고 효율적인 금융 거래를 지원합니다
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">시스템 가용성</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">금융기관 파트너</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">기술 지원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Core Features</p>
+                <h2 class="section-title">혁신적인 뱅킹 플랫폼</h2>
+                <p class="section-description">
+                    최신 핀테크 기술과 금융 규제를 완벽하게 준수하는 안전한 뱅킹 솔루션을 제공합니다
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-content fade-in-up">
+                    <h3>핵심 기능</h3>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>고급 보안 시스템</h4>
+                                <p>다중 인증, 생체 인식, 암호화 통신으로 최고 수준의 보안을 제공합니다.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>실시간 거래 처리</h4>
+                                <p>고성능 트랜잭션 엔진으로 대용량 거래를 실시간으로 안전하게 처리합니다.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="smartphone"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>모바일 우선 설계</h4>
+                                <p>직관적인 모바일 인터페이스로 언제 어디서나 편리한 금융 서비스를 이용할 수 있습니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-visual fade-in-up">
+                    <div class="platform-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <span style="color: #666; font-size: 0.9rem;">SOFTGRAM Banking</span>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="balance-card">
+                                <div class="balance-title">총 잔고</div>
+                                <div class="balance-amount">₩ 12,450,000</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div>
+                                    <strong>온라인 쇼핑</strong>
+                                    <div style="font-size: 0.8rem; color: #666;">2024.08.22</div>
+                                </div>
+                                <div style="color: #dc3545;">-₩ 89,000</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div>
+                                    <strong>급여 입금</strong>
+                                    <div style="font-size: 0.8rem; color: #666;">2024.08.21</div>
+                                </div>
+                                <div style="color: #28a745;">+₩ 3,200,000</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div>
+                                    <strong>카페 결제</strong>
+                                    <div style="font-size: 0.8rem; color: #666;">2024.08.21</div>
+                                </div>
+                                <div style="color: #dc3545;">-₩ 4,500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="solutions">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <p class="section-subtitle">Solutions</p>
+                <h2 class="section-title">맞춤형 뱅킹 솔루션</h2>
+                <p class="section-description">
+                    다양한 금융기관의 요구사항에 맞는 전문화된 뱅킹 솔루션을 제공합니다
+                </p>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="building"></i>
+                    </div>
+                    <h3>기업 뱅킹</h3>
+                    <p>기업 고객을 위한 통합 금융 관리 플랫폼으로 자금 관리, 결제, 투자까지 원스톱 서비스를 제공합니다.</p>
+                </div>
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>개인 뱅킹</h3>
+                    <p>개인 고객 맞춤형 금융 서비스로 일상 거래부터 자산 관리까지 편리하고 안전한 뱅킹 경험을 제공합니다.</p>
+                </div>
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <h3>인터넷 뱅킹</h3>
+                    <p>웹 기반 뱅킹 플랫폼으로 PC와 모바일 모든 환경에서 일관된 사용자 경험을 제공합니다.</p>
+                </div>
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="credit-card"></i>
+                    </div>
+                    <h3>디지털 월렛</h3>
+                    <p>모바일 결제, 송금, 포인트 관리 등 통합 디지털 금융 서비스를 하나의 앱에서 제공합니다.</p>
+                </div>
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="bar-chart"></i>
+                    </div>
+                    <h3>자산 관리</h3>
+                    <p>AI 기반 투자 분석과 포트폴리오 관리로 개인 맞춤형 자산 관리 서비스를 제공합니다.</p>
+                </div>
+                <div class="solution-card fade-in-up">
+                    <div class="solution-icon">
+                        <i data-lucide="lock"></i>
+                    </div>
+                    <h3>보안 솔루션</h3>
+                    <p>금융권 특화 보안 시스템으로 거래 보안부터 개인정보 보호까지 완벽한 보안 환경을 구축합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="fade-in-up">차세대 뱅킹 플랫폼으로<br>금융 혁신을 시작하세요</h2>
+            <p class="fade-in-up">
+                SOFTGRAM의 Banking Solutions로 고객에게 더 나은 금융 경험을 제공하고<br>
+                디지털 금융 시장에서의 경쟁우위를 확보하십시오
+            </p>
+            <a href="../index.html#contact" class="cta-button fade-in-up">Banking 솔루션 문의</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 SOFTGRAM. All rights reserved.<br>혁신적인 소프트웨어 솔루션의 파트너</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+            
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
